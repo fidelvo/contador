@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  final estiloTexto = TextStyle(fontSize: 25);
-  final int _conteo = 10;
+class ContadorPage extends StatefulWidget {
+
+  @override
+  createState() => _ContadorPageState();
+
+}
+
+class _ContadorPageState extends State<ContadorPage> {
+  final _estiloTexto = TextStyle(fontSize: 25);
+  int _conteo = 10;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Título'),
+        title: Text('Contador'),
         centerTitle: true,
         elevation: 10.0,
       ),
@@ -16,8 +23,8 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Número de taps:', style: estiloTexto),
-            Text('$_conteo', style: estiloTexto),
+            Text('Número de clics:', style: _estiloTexto),
+            Text('$_conteo', style: _estiloTexto),
           ],
         ),
       ),
@@ -31,18 +38,31 @@ class HomePage extends StatelessWidget {
       SizedBox(width: 30.0),
       FloatingActionButton(
         child: Icon(Icons.exposure_zero),
-        onPressed: null,
+        onPressed: _reset,
       ),
       Expanded(child: SizedBox(width: 5.0)),
       FloatingActionButton(
         child: Icon(Icons.remove),
-        onPressed: null,
+        onPressed: _sustraer,
       ),
       SizedBox(width: 5.0),
       FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: null,
+        onPressed: _agregar,
       ),
     ]);
   }
+
+  void _agregar(){
+    setState(() => _conteo++);
+  }
+
+  void _sustraer(){
+    setState(() => _conteo--);
+  }
+
+  void _reset(){
+    setState(() => _conteo = 0);
+  }
+
 }
